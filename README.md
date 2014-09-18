@@ -62,9 +62,13 @@ indicated by red text.
 
 Here is an example of how a generated board looks like:
 
-![Screenshot example board](https://raw.github.com/susestudio/kanban/master/screenshot-board.png)
+![Screenshot example board](https://raw.github.com/lmmx/kanban/master/screenshot-board.png)
 
 \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/
+
+With the modifications for student use, a lot of complexity can be taken out to give the basics of getting a task done - development/research/review, 'underway' and 'finalising':
+
+![Screenshot example modified board](https://raw.github.com/lmmx/kanban/master/screenshot-student-board.png)
 
 ## Useful .bashrc aliases with stupid names
 

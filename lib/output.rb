@@ -186,7 +186,8 @@ class Output
     o "<table border='1'>\n"
   
     render_column_headers
-    render_column_limits
+# don't want software dev limit tracking
+#    render_column_limits
     render_subcolumn_headers
 
     if @compact_lanes || !@has_lanes
@@ -203,7 +204,7 @@ class Output
 
     if !@plain_table
       render_subcolumn_headers
-      render_column_limits
+#      render_column_limits
       render_column_headers "-bottom"
     end
 
@@ -322,6 +323,7 @@ class Output
     o "</tr>\n"
 
 # Don't want this - it's for some sort of software dev progress tracking
+# which takes up valuable board space!
 #
 #    o "<tr>\n"
 #    @board.columns.each do |column|
