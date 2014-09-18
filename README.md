@@ -27,7 +27,7 @@ Regarding attributes:
 	@<task type> - no longer refers to a user, rather to the type of task
 	               e.g. which course module it's for or if it's relating
 	                    to extramural projects etc.
-			     There can be more than one task type associated with an item.
+			        There can be more than one task type associated with an item.
 
     #<tag> - An arbitrary tag for the item. Tags also define classes of service,
              which are put into their respective swim lanes. Valid values for
