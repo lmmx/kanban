@@ -69,11 +69,11 @@ Here is an example of how a generated board looks like:
 
 Replacing {/gits/kanban} with the path to your local 'kanban' folder from this repo:
 
-	alias yeswekanban='cd {/gits/kanban}; ./bin/kanban ./data.txt; cd - > /dev/null'
+	alias yeswekanban='kanout="$(cd {/gits/kanban}; ./bin/kanban ./data.txt; cd - > /dev/null)"; echo $(echo $(echo "$kanout" | sed "1d;\$d" | sed "s/board .*$/board\.\.\./g")); echo $(echo "$kanout" | tail -1)'
 
-It's necessary to `cd` into the folder in this way, as a `html/` folder is created relative to the path it was executed from. `xdg-open` is equivalent to `open` on OS X.
+Updates the HTML output - it's necessary to `cd` into the folder in this way, as a `html/` folder is created relative to the path it was executed from. `xdg-open` is equivalent to `open` on OS X. The `sed` and `tail` commands manipulate the output onto just two lines, hiding the board name.
 
-	alias kankan='vim {/gits/kanban}/data.txt'
+	alias kankan='vim {/gits/kanban}/data.txt && yeswekanban'
 
 Other text editors are available...
 
