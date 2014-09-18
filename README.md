@@ -16,14 +16,19 @@ The format of an item is:
 where <name of item> is the display name of the item, and <attributes> is a
 comma-separated list of attributes.
 
-The following attributes are supported:
+## Louis's student kanban
+
+To make this kanban generator suitable for student rather than software developmer use, I've switched some of the organisation around.
+
+Regarding attributes:
+
+	bnc#<bugzilla id> - this attribute is no longer used (software bug ID number)
+
+	@<task type> - no longer refers to a user, rather to the type of task e.g. which course module it's for or if it's relating to extramural projects etc.
 
     #<tag> - An arbitrary tag for the item. Tags also define classes of service,
              which are put into their respective swim lanes. Valid values for
              classes of service are #emergency, #bug, #feature, and #maintenance.
-
-    bnc#<bugzilla id> - The id of a Bugzilla entry, which is associated with the
-                        item.
 
     in:<date> - The date the item was put into the "In" column in ISO format.
 
