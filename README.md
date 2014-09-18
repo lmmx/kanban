@@ -45,7 +45,7 @@ Regarding attributes:
 
 From the original documentation (susestudio/kanban on GitHub):
 	
-\_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/
+\_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/
 
 Items are listed in the column, which is represented by the section in which
 they are in the input file. To move an item from one column to another its line
@@ -63,14 +63,20 @@ Here is an example of how a generated board looks like:
 
 ![Screenshot example board](https://raw.github.com/susestudio/kanban/master/screenshot-board.png)
 
-\_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/
+\_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/
 
-## Some useful aliases with stupid names for your .bashrc
+## Useful .bashrc aliases with stupid names
 
 Replacing {/gits/kanban} with the path to your local 'kanban' folder from this repo:
 
 	alias yeswekanban='cd {/gits/kanban}; ./bin/kanban ./data.txt; cd - > /dev/null'
+
+It's necessary to `cd` into the folder in this way, as a `html/` folder is created relative to the path it was executed from. `xdg-open` is equivalent to `open` on OS X.
+
 	alias kankan='vim {/gits/kanban}/data.txt'
+
+Other text editors are available...
+
 	alias seekanban='(xdg-open {/gits/kanban}/html/index.html &) > /dev/null 2>&1'
 
-NB: It's necessary to `cd` into the folder in this way, as a `html/` folder is created and if for example you're already in `kanban/html/`, you'll end up with a `html/` subdirectory - `kanban/html/html/`. `xdg-open` is equivalent to `open` on OS X.
+Chrome opens new tabs quite verbosely, so the command here is in a subshell and STDOUT/STDERR muted. `xdg-open` = `open` on OS X.
