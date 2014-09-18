@@ -45,7 +45,7 @@ Regarding attributes:
 
 From the original documentation (susestudio/kanban on GitHub):
 	
-_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+\_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/
 
 Items are listed in the column, which is represented by the section in which
 they are in the input file. To move an item from one column to another its line
@@ -63,9 +63,9 @@ Here is an example of how a generated board looks like:
 
 ![Screenshot example board](https://raw.github.com/susestudio/kanban/master/screenshot-board.png)
 
-_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/_/
+\_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/   \_/
 
-## Some useful aliases for your .bashrc
+## Some useful aliases with stupid names for your .bashrc
 
 Replacing {/gits/kanban} with the path to your local 'kanban' folder from this repo:
 
