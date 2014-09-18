@@ -7,10 +7,10 @@ class Board
     @items = Array.new
 
     @lanes = Array.new
-    @lanes.push Lane.new( "emergency", "Emergencies", 10 )
-    @lanes.push Lane.new( "bug", "Bugs", 30 )
-    @lanes.push Lane.new( "feature", "Features", 30 )
-    @lanes.push Lane.new( "maintenance", "Code and system maintenance", 30 )
+    @lanes.push Lane.new( "emergency", "Urgent", 10 )
+    @lanes.push Lane.new( "bug", "Emails, meetings", 30 )
+    @lanes.push Lane.new( "feature", "Readings, prep work etc.", 30 )
+    @lanes.push Lane.new( "maintenance", "To do / non-academic", 30 )
   end
 
   def add_column column

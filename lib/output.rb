@@ -321,38 +321,40 @@ class Output
     end
     o "</tr>\n"
 
-    o "<tr>\n"
-    @board.columns.each do |column|
-      o "<td"
-      if column.subcolumns.count > 1
-        o " colspan='#{column.subcolumns.count}'"
-      end
-      o ">"
-      
-      item_count = 0
-      column.items.each do |item|
-        next if !item.tags.include? lane.key
-        next if item.trashed
-        item_count += 1
-      end
-
-      limit = ""
-      limit_class = ""
-      if column.limit == 0
-        limit = ""
-      else
-        actual = item_count * 100 / column.limit
-        limit = "(#{actual}%/#{lane.limit}%)"
-        if actual > lane.limit && item_count > 1
-          limit_class = " lane-exceeded"
-        end
-      end
-      o "<div class='lane-limits #{limit_class}'>#{limit}</div>"
-
-      o "</td>"
-    end
-      
-    o "</tr>\n"  
+# Don't want this - it's for some sort of software dev progress tracking
+#
+#    o "<tr>\n"
+#    @board.columns.each do |column|
+#      o "<td"
+#      if column.subcolumns.count > 1
+#        o " colspan='#{column.subcolumns.count}'"
+#      end
+#      o ">"
+#      
+#      item_count = 0
+#      column.items.each do |item|
+#        next if !item.tags.include? lane.key
+#        next if item.trashed
+#        item_count += 1
+#      end
+#
+#      limit = ""
+#      limit_class = ""
+#      if column.limit == 0
+#        limit = ""
+#      else
+#        actual = item_count * 100 / column.limit
+#        limit = "(#{actual}%/#{lane.limit}%)"
+#        if actual > lane.limit && item_count > 1
+#          limit_class = " lane-exceeded"
+#        end
+#      end
+#      o "<div class='lane-limits #{limit_class}'>#{limit}</div>"
+#
+#      o "</td>"
+#    end
+#      
+#    o "</tr>\n"  
   end
 
   def render_lane_limits
