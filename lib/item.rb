@@ -94,7 +94,7 @@ class Item
   def reference_url key, id
     case key
     when :bnc
-      return "https://bugzilla.novell.com/show_bug.cgi?id=#{id}"
+      return "http://dx.doi.org/#{id}"
     when :github
       return "https://github.com/#{id}/issues/milestones"
     else
