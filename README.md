@@ -83,7 +83,7 @@ With the modifications for student use, a lot of complexity can be taken out to 
 
 ### Work in progress
 
-* Manipulation of the kanban/focussing it without repeatedly creating new tabs to check it using [Chromix] - see below.
+* Manipulation of the kanban/focussing it without repeatedly creating new tabs to check it using [Chromix](http://chromix.smblott.org/) - see below.
 * Use of HTML5 drag and drop events to reorder items within a column, and more importantly to progress items. The alternative to this (i.e. if it's not possible to parse HTML page changes back into Markdown and send this via Chromix into a Javascript-manipulatable webapp in another tab like [flytext.in](http://flytext.in) - proof of concept for doing this is [here](https://gist.github.com/lmmx/c414a1d4822a025380e7)) is to just write some custom shell function that greps task titles, works out the subsection and edits the file accordingly (draft script for this is [here](https://gist.github.com/lmmx/8a6794a98286d00d6797)) - but this is messier, requiring assumption of the ordering of tasks in the kanban/markdown, and less intuitive than drag and drop.
 
 ### Useful .bashrc aliases with stupid names
@@ -101,3 +101,68 @@ Other text editors are available...
 	alias seekanban='(xdg-open {/gits/kanban}/html/index.html &) > /dev/null 2>&1'
 
 Chrome opens new tabs quite verbosely, so the command here is in a subshell and STDOUT/STDERR muted. `xdg-open` = `open` on OS X.
+
+Taking this a bit further, [on Linux Mint] it's possible to have more elaborate constructions and `source` the .bashrc within custom keyboard shortcut commands. In my case, Ctrl-Alt-K ran
+
+	google-chrome /home/louis/Dropbox/kanban/main/html/index.html
+
+until I realised this would open multiple tabs each time I wanted to check the kanban - instead I installed [chromix](http://chromix.smblott.org/) which uses Node.js and a Chrome extension to exert finer control over a browser session. The following functions are loaded in each browser session - it's a first draft and it currently requires 2 calls to `gogochromix` to ensure definite response (but this is preferable over anything that repeatedly calls `chromix-server`, which can cause it to stop responding to ping requests).
+
+	function pingpong { pingcheck=$(chromix ping; echo $?); }
+	function quietly () { "$@" > /dev/null 2>&1; }
+	function servertogo () {
+		if [[ "$@" == '' ]]
+		then
+			echo "chromix-server is running"
+		else
+			chromix "$@"
+		fi
+	}
+	function gogochromix () {
+		quietly pingpong
+		if [ $pingcheck == 0 ]
+		then
+			# Success, execute final chromix commands
+			servertogo "$@"
+		else
+			quietly chromix-server & killid=$!
+			sleep 1
+			quietly pingpong
+			if [ $pingcheck == 0 ]
+			then
+				# Success on second attempt, exit chromix commands
+				servertogo "$@"
+			else
+				sleep 1
+				if [ $pingcheck == 0 ]
+				then
+					servertogo "$@"
+				else
+					sleep 1
+					if [ $pingcheck == 0 ]
+					then
+						servertogo "$@"
+					else
+						echo "giving up"
+					fi
+				fi
+			fi
+		fi
+	}
+
+For local files, the `load` command [will make chromix reload a page](http://chromix.smblott.org/#_load) (unlike for web pages), so it's necessary to check if the page can be focussed, and then load it. For all my uses so far the `load` command is fine - reloading a local file makes no difference and makes the page reflect changes to the markdown which I want. This is the difference between:
+
+	gogochromix with file:///home/louis/Dropbox/kanban/main/html/index.html focus
+	gogochromix load file:///home/louis/Dropbox/kanban/main/html/index.html
+
+If the tab is open, the former returns a message beginning with "done"; if there's no such tab there is no output.
+
+Chromix can send Javascript to be executed on the tab showing the kanban file with
+
+	gogochromix with file:///home/louis/Dropbox/kanban/main/html/index.html goto javascript:(function(){ javascriptGoesHere; }())
+
+In short, this could pick up any changes to the page and send them either back to the shell to update a local file or to a webapp connected to cloud storage and amenable to Javascript manipulation, such as [Flytext](http://flytext.in)
+
+	gogochromix with https://flytext.in/ goto "javascript:(function(){ openFile('kanban/main/data.txt'); extendedJavascriptFunctionGoesHere; }())"
+
+TBC
