@@ -18,9 +18,11 @@ comma-separated list of attributes.
 
 ## Louis's student kanban
 
-To make this kanban generator suitable for student rather than software developer use, I've switched some of the organisation around. I've added a secondary folder for [blog and essay] writing ideas, with modified lane titles to reflect this. Intended more as an ideas board than for monitoring, WIP/done subcolumns have been removed and draft post IDs are used as attributes to generate links to continue work or to reference source articles if a first draft hasn't begun.
+To make this kanban generator suitable for student rather than software developer use, I've switched some of the organisation around.
 
 Regarding attributes:
+
+	bnc#<bugzilla id> - this attribute is no longer used (software bug ID number)
 
 	doi#<doi> - this generates a url to access the associated scholarly item
 				at http://dx.doi.org/<doi>
@@ -31,9 +33,6 @@ Regarding attributes:
 				 the post edit URL
 
 	url#<url> - simply associates a full link to item (should attach to title?)
-
-	laverna#<laverna id> - self-hosted Laverna server instance (or on local HTML5 storage
-			       at laverna.cc) notes accessible by an ID sim. Evernote.
 
 	@<task type> - no longer refers to a user, rather to the type of task
 	               e.g. which course module it's for or if it's relating
