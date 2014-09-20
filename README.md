@@ -81,7 +81,12 @@ With the modifications for student use, a lot of complexity can be taken out to 
 
 ![Screenshot example modified board](https://raw.github.com/lmmx/kanban/master/screenshot-student-board.png)
 
-## Useful .bashrc aliases with stupid names
+### Work in progress
+
+* Manipulation of the kanban/focussing it without repeatedly creating new tabs to check it using [Chromix] - see below.
+* Use of HTML5 drag and drop events to reorder items within a column, and more importantly to progress items. The alternative to this (i.e. if it's not possible to parse HTML page changes back into Markdown and send this via Chromix into a Javascript-manipulatable webapp in another tab like [flytext.in](http://flytext.in) - proof of concept for doing this is [here](https://gist.github.com/lmmx/c414a1d4822a025380e7)) is to just write some custom shell function that greps task titles, works out the subsection and edits the file accordingly (draft script for this is [here](https://gist.github.com/lmmx/8a6794a98286d00d6797)) - but this is messier, requiring assumption of the ordering of tasks in the kanban/markdown, and less intuitive than drag and drop.
+
+### Useful .bashrc aliases with stupid names
 
 Replacing {/gits/kanban} with the path to your local 'kanban' folder from this repo:
 
