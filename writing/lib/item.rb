@@ -1,12 +1,12 @@
 class Item
 
-  attr_accessor :name, :subcolumn, :tags, :persons, :in, :done, :trashed,
+  attr_accessor :name, :subcolumn, :tags, :persons, :in, :done, :complete,
     :hidden, :blocked, :references
   
   def initialize
     @tags = Array.new
     @persons = Array.new
-    @hidden_tags = [ "emergency", "bug", "feature", "maintenance" ]
+    @hidden_tags = [ "urgent", "contact", "lectures", "misc" ]
     @references = Array.new
   end
 
@@ -50,15 +50,15 @@ class Item
         @done = Date.parse $1
       elsif arg =~ /^due:(.*)/
         @due = Date.parse $1        
-      elsif arg =~ /^trashed:(.*)/
-        @trashed = Date.parse $1        
+      elsif arg =~ /^complete:(.*)/
+        @complete = Date.parse $1        
       else
         STDERR.puts "Unrecognized parameter: #{arg}"
       end
     end
     
     if !@in
-      raise "Item is missin in: attribute"
+      raise "Item is missing in: attribute"
     end
   end
 
@@ -82,9 +82,14 @@ class Item
   
   def formatted_id key, id
     prefix = ""
-    prefix = "#{key}:" unless key == :bnc
+    prefix = "#{key} &raquo;" unless key == :url
+    if key == :url
+      prefix = "Web"
+    elsif key == :laverna
+      prefix = "Laverna"
+    end
     begin
-      "#{prefix}<a target='_blank' href='#{reference_url(key,id)}'>#{id}</a>"
+      "<a target='_blank' href='#{reference_url(key,id)}'>#{prefix}</a>"
     rescue => e
       STDERR.puts "Warning: #{e}"
       "#{key}:#{id}"
@@ -97,8 +102,10 @@ class Item
       return "http://dx.doi.org/#{id}"
     when :draft
       return "http://biochemistri.es/private/#{id}"
-	when :url
-	  return "#{id}"
+    when :url
+      return "#{id}"
+    when :laverna
+      return "https://laverna.cc/index.html#/notes/p0/show/#{id}"
     else
       raise "Unknown reference key: #{key}"
     end

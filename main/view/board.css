@@ -54,7 +54,7 @@ table {
 	color: #FFFFFF;	 
 }
 
-.item.tag_online {
+.item.tag_onhold {
 	background: #4d77cb;
 	border-color: #4d77cb;
 	border-image: none;
@@ -62,7 +62,7 @@ table {
 	color: #FFFFFF;
 	text-shadow: 1px 1px 1px #414141;							 
 }
-.item.tag_onsite {
+.item.tag_pressing {
 	background: #e09952;
 	border-color: #e09952;
 	border-image: none;
@@ -94,6 +94,7 @@ table {
 	color: #FFFFFF;
 	text-decoration: none;
 	font-weight: bold;
+	margin-left: 10px;
 }
 
 td {

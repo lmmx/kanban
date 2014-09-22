@@ -1,6 +1,6 @@
 class Output
 
-  attr_accessor :board, :compact_lanes, :has_lanes, :extra_css, :plain_table
+  attr_accessor :board, :compact_lanes, :has_lanes, :extra_css, :extra_js, :plain_table
   
   def initialize board
     @board = board
@@ -46,6 +46,14 @@ class Output
       css_out << File.read( @extra_css )
     end
     css_out
+  end
+
+  def js
+    js_out = File.read File.expand_path("../../view/board.js",__FILE__)
+    if @extra_js
+      js_out << File.read( @extra_js )
+    end
+    js_out
   end
 
   def render_navigation
@@ -145,11 +153,11 @@ class Output
     @out
   end
 
-  def render_trashed
+  def render_complete
     @out = ""
 
     board.items.each do |item|
-      if item.trashed
+      if item.complete
         render_item item
       end
     end
@@ -304,19 +312,22 @@ class Output
 
   def render_lane lane
     o "<tr>\n"
+    boxcount = 0
     first = true
     @board.columns.each do |column|
       if column.has_subcolumns?
         column.subcolumns.each do |subcolumn|
-          o "  <td>\n"
+          o "  <td ondragenter=\"this.classList.add('over');\" ondragleave=\"this.classList.remove('over');\" id='box#{boxcount}' class='targbox' ondrop='drop(event)' ondragover='allowDrop(event)'>\n"
           render_items column, column.items( subcolumn ), lane, first
           o "  </td>\n"
+          boxcount += 1
           first = false
         end
       else
-        o "  <td>\n"
+        o "  <td ondragenter=\"this.classList.add('over');\" ondragleave=\"this.classList.remove('over');\" id='box#{boxcount}' class='targbox' ondrop='drop(event)' ondragover='allowDrop(event)'>\n"
         render_items column, column.items, lane, first
         o "  </td>\n"
+        boxcount += 1
         first = false
       end
     end
@@ -336,7 +347,7 @@ class Output
 #      item_count = 0
 #      column.items.each do |item|
 #        next if !item.tags.include? lane.key
-#        next if item.trashed
+#        next if item.complete
 #        item_count += 1
 #      end
 #
@@ -368,7 +379,7 @@ class Output
     end
     items.each do |item|
       next if lane && !item.tags.include?( lane.key )
-      next if item.trashed
+      next if item.complete
       if !item.hidden
         o "    "
         render_item item
@@ -383,7 +394,7 @@ class Output
     end
     o "'>"
     if !item.formatted_ids.empty?
-      o "<div class='item_id'>#{item.formatted_ids.join(', ')}</div>"
+      o "<div class='item_id'>#{item.formatted_ids.join('')}</div>"
     end
     o "<div>#{item.name}"
     if item.blocked
@@ -403,8 +414,8 @@ class Output
       if options[:show_done_date]
         o " (done on #{item.done})"
       end
-    elsif item.trashed
-      o "trashed"
+    elsif item.complete
+      o "complete"
     else
       if item.in == Date.today
         o "today"

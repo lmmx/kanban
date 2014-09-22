@@ -7,10 +7,10 @@ class Board
     @items = Array.new
 
     @lanes = Array.new
-    @lanes.push Lane.new( "emergency", "Urgent", 10 )
-    @lanes.push Lane.new( "bug", "Emails, meetings", 30 )
-    @lanes.push Lane.new( "feature", "Readings, prep work etc.", 30 )
-    @lanes.push Lane.new( "maintenance", "To do / non-academic", 30 )
+    @lanes.push Lane.new( "urgent", "Urgent", 10 )
+    @lanes.push Lane.new( "contact", "Emails, meetings", 30 )
+    @lanes.push Lane.new( "lectures", "Readings, prep work etc.", 30 )
+    @lanes.push Lane.new( "misc", "To do / non-academic", 30 )
   end
 
   def add_column column
@@ -38,6 +38,7 @@ class Board
         end
       end
       if !has_lane
+        STDERR.puts item.tags
         STDERR.puts "Item '#{item}' is missing a lane tag."
       end
     end

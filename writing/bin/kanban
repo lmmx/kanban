@@ -8,6 +8,7 @@ do_pull = false
 compact_lanes = false
 swimlanes = true
 extra_css = nil
+extra_js = nil
 plain_table = false
 
 opt = OptionParser.new
@@ -41,6 +42,10 @@ end
 
 opt.on( "--extra-css <filenam>", "Include an extra CSS file" ) do |value|
   extra_css = value
+end
+
+opt.on( "--extra-js <filenam>", "Include an extra Javascript file" ) do |value|
+  extra_js = value
 end
 
 opt.on( "--plain-table", "Only output a plain table" ) do
@@ -89,6 +94,7 @@ output = Output.new board
 output.compact_lanes = compact_lanes
 output.has_lanes = swimlanes
 output.extra_css = extra_css
+output.extra_js = extra_js
 output.plain_table = plain_table
 
 output.create output_dir

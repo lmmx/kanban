@@ -1,6 +1,8 @@
 %header
   %style{:type => "text/css", :media => "screen"}
     = css
+  %script{:type => "text/javascript"}
+    = js
   %title Done - Kanban
 
 %body
@@ -11,8 +13,8 @@
     %h2 All done tasks
     = render_done
 
-    %h2 All trashed tasks
-    = render_trashed
+    %h2 All completed tasks
+    = render_complete
 
   .navigation
     = render_navigation
