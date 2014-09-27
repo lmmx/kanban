@@ -117,6 +117,8 @@ class Item
       return "#{id}"
     when :laverna
       return "https://laverna.cc/index.html#/notes/p0/show/#{id}"
+    when :gist
+      return "https://gist.github.com/lmmx/#{id}"
     else
       raise "Unknown reference key: #{key}"
     end
