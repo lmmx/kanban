@@ -87,12 +87,20 @@ class Item
       prefix = "Web"
     elsif key == :laverna
       prefix = "Laverna"
+    elsif key == :draft
+      prefix = "View  /"
     end
-    begin
-      "<a target='_blank' href='#{reference_url(key,id)}'>#{prefix}</a>"
-    rescue => e
-      STDERR.puts "Warning: #{e}"
-      "#{key}:#{id}"
+    if key == :draft
+      begin
+        "<a target='_blank' class='continue' href='#{reference_url(:draftedit,id)}'>edit draft</a><a target='_blank' href='#{reference_url(key,id)}'>#{prefix}</a>"
+      rescue => e
+        STDERR.puts "Warning: #{e}"
+        "#{key}:#{id}"
+      end
+    else
+      begin
+        "<a target='_blank' href='#{reference_url(key,id)}'>#{prefix}</a>"
+      end
     end
   end
   
@@ -102,6 +110,9 @@ class Item
       return "http://dx.doi.org/#{id}"
     when :draft
       return "http://biochemistri.es/private/#{id}"
+    when :draftedit
+      splitid = id.split(/\//)
+      return "https://www.tumblr.com/edit/#{splitid[0]}?redirect_to=http%3A%2F%2Fbiochemistri.es%2Fprivate%2F#{splitid[0]}%2F#{splitid[1]}"
     when :url
       return "#{id}"
     when :laverna

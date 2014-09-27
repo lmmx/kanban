@@ -97,6 +97,10 @@ table {
 	margin-left: 10px;
 }
 
+.item_id a.continue {
+	margin-left: 4px !important;
+}
+
 td {
 	vertical-align: top;
 }
